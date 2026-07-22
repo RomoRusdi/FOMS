@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Eye, Loader2, MoreHorizontal } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -10,7 +10,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { KwitansiPaperData } from "@/components/kwitansi/kwitansi-paper";
-import { buildKwitansiObjectUrl, downloadKwitansiPdf } from "@/lib/pdf/actions";
+import {
+  buildKwitansiObjectUrl,
+  downloadKwitansiPdf,
+  preloadPdf,
+} from "@/lib/pdf/actions";
 import { DEFAULT_SETTINGS } from "@/lib/settings";
 import type { Receipt } from "@/lib/types";
 
@@ -31,6 +35,10 @@ function toPaperData(r: Receipt): KwitansiPaperData {
 
 export function RowActions({ receipt }: { receipt: Receipt }) {
   const [busy, setBusy] = useState<null | "view" | "pdf">(null);
+
+  useEffect(() => {
+    preloadPdf();
+  }, []);
 
   async function handleView() {
     // Open the tab synchronously so the browser keeps the user-gesture allowance.

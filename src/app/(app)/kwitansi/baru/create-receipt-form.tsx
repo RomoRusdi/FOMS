@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronDown, Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { formatNumber } from "@/lib/format";
-import { downloadKwitansiPdf } from "@/lib/pdf/actions";
+import { downloadKwitansiPdf, preloadPdf } from "@/lib/pdf/actions";
 import type { Settings } from "@/lib/settings";
 import { terbilang } from "@/lib/terbilang";
 import type { Company, ReceiptStatus, Vessel } from "@/lib/types";
@@ -71,6 +71,10 @@ export function CreateReceiptForm({
   const [date, setDate] = useState(initialDate);
   const [amount, setAmount] = useState(initial.amount);
   const [description, setDescription] = useState(initial.description);
+
+  useEffect(() => {
+    preloadPdf();
+  }, []);
 
   const companyName =
     companies.find((c) => c.id === companyId)?.company_name ?? "";
