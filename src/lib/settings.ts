@@ -19,9 +19,9 @@ export const DEFAULT_SETTINGS: Settings = {
   companyName: "PT KECAP NUSANTARA",
   companyAddress: "",
   city: "Jakarta",
-  bankLine: "Bank Central Asia (BCA) · 0073303661 · a.n Taufic Yuniyanto",
+  bankLine: "",
   footerNote: "",
-  signerName: "Taufic Yuniyanto",
+  signerName: "",
   signerRole: "",
   receiptPattern:
     process.env.NEXT_PUBLIC_RECEIPT_PATTERN || DEFAULT_RECEIPT_PATTERN,
