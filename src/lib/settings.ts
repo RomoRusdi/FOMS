@@ -17,16 +17,16 @@ export interface Settings {
  */
 export const DEFAULT_SETTINGS: Settings = {
   companyName: "PT KECAP NUSANTARA",
-  companyAddress: "Jl. Pelabuhan Raya No. 88, Surabaya · Telp (031) 555-0188",
-  city: "Surabaya",
-  bankLine: "Bank Mandiri · 142-00-1234567-8 · a.n PT Kecap Nusantara",
-  footerNote: "Dokumen sah tanpa tanda tangan basah",
-  signerName: "Andi Darma",
-  signerRole: "Admin Finance",
+  companyAddress: "",
+  city: "Jakarta",
+  bankLine: "Bank Central Asia (BCA) · 0073303661 · a.n Taufic Yuniyanto",
+  footerNote: "",
+  signerName: "Taufic Yuniyanto",
+  signerRole: "",
   receiptPattern:
     process.env.NEXT_PUBLIC_RECEIPT_PATTERN || DEFAULT_RECEIPT_PATTERN,
 };
 
-export function getSettings(): Settings {
-  return DEFAULT_SETTINGS;
-}
+// NOTE: the async, DB-backed getSettings() lives in "@/lib/data/settings"
+// (server-only). DEFAULT_SETTINGS here is the client-safe fallback/baseline —
+// empty DB fields fall back to these values.

@@ -1,19 +1,19 @@
 import { getCompanies, getVessels } from "@/lib/data/master";
 import { getNextReceiptNumber } from "@/lib/data/receipts";
+import { getSettings } from "@/lib/data/settings";
 import { toISODate } from "@/lib/format";
-import { getSettings } from "@/lib/settings";
 import { CreateReceiptForm } from "./create-receipt-form";
 
 export const metadata = { title: "Buat Kwitansi · FOMS" };
 
 export default async function BuatKwitansiPage() {
   const today = toISODate(new Date());
+  const settings = await getSettings();
   const [companies, vessels, initialNumber] = await Promise.all([
     getCompanies(),
     getVessels(),
-    getNextReceiptNumber(today),
+    getNextReceiptNumber(today, settings.receiptPattern),
   ]);
-  const settings = getSettings();
 
   // Prefill mirrors the hi-fi mock so the live preview is populated on load.
   const prefCompany =

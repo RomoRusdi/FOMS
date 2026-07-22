@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getNextReceiptNumber } from "@/lib/data/receipts";
+import { getSettings } from "@/lib/data/settings";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { terbilang } from "@/lib/terbilang";
@@ -21,7 +22,8 @@ export async function createReceipt(input: ReceiptInput): Promise<CreateResult> 
   }
   const data = parsed.data;
 
-  const number = await getNextReceiptNumber(data.date);
+  const settings = await getSettings();
+  const number = await getNextReceiptNumber(data.date, settings.receiptPattern);
   const words = terbilang(data.amount);
 
   // DEMO mode: no backend to persist to — return the generated number so the

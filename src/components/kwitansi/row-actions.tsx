@@ -15,7 +15,7 @@ import {
   downloadKwitansiPdf,
   preloadPdf,
 } from "@/lib/pdf/actions";
-import { DEFAULT_SETTINGS } from "@/lib/settings";
+import type { Settings } from "@/lib/settings";
 import type { Receipt } from "@/lib/types";
 
 const box =
@@ -33,7 +33,13 @@ function toPaperData(r: Receipt): KwitansiPaperData {
   };
 }
 
-export function RowActions({ receipt }: { receipt: Receipt }) {
+export function RowActions({
+  receipt,
+  settings,
+}: {
+  receipt: Receipt;
+  settings: Settings;
+}) {
   const [busy, setBusy] = useState<null | "view" | "pdf">(null);
 
   useEffect(() => {
@@ -47,7 +53,7 @@ export function RowActions({ receipt }: { receipt: Receipt }) {
     try {
       const { url } = await buildKwitansiObjectUrl(
         toPaperData(receipt),
-        DEFAULT_SETTINGS,
+        settings,
       );
       if (win) win.location.href = url;
       else window.location.href = url;
@@ -63,7 +69,7 @@ export function RowActions({ receipt }: { receipt: Receipt }) {
   async function handleDownload() {
     setBusy("pdf");
     try {
-      await downloadKwitansiPdf(toPaperData(receipt), DEFAULT_SETTINGS);
+      await downloadKwitansiPdf(toPaperData(receipt), settings);
     } catch {
       toast.error("Gagal membuat PDF");
     } finally {

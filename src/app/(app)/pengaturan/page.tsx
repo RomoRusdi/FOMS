@@ -1,10 +1,9 @@
-import { PagePlaceholder } from "@/components/page-placeholder";
+import { getSettings } from "@/lib/data/settings";
+import { SettingsForm } from "./settings-form";
 
-export default function PengaturanPage() {
-  return (
-    <PagePlaceholder
-      title="Pengaturan"
-      description="Nama perusahaan, logo, alamat, footer kwitansi, nomor rekening, nama pemilik rekening, bank, dan tanda tangan yang muncul otomatis di kwitansi. Mengikuti PRD Module 10."
-    />
-  );
+export const metadata = { title: "Pengaturan · FOMS" };
+
+export default async function PengaturanPage() {
+  const settings = await getSettings();
+  return <SettingsForm initial={settings} />;
 }

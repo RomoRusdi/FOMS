@@ -6,6 +6,7 @@ import { RowActions } from "@/components/kwitansi/row-actions";
 import { StatusBadge } from "@/components/status-badge";
 import { getReceipts } from "@/lib/data/receipts";
 import { getCompanies } from "@/lib/data/master";
+import { getSettings } from "@/lib/data/settings";
 import { formatDateShort, formatNumber, formatRupiah, formatRupiahCompact } from "@/lib/format";
 import type { ReceiptStatus } from "@/lib/types";
 
@@ -35,18 +36,20 @@ export default async function KwitansiPage({
   const filterYear = yearStr ? Number(yearStr) : new Date().getFullYear();
   const page = pageStr ? Math.max(1, Number(pageStr)) : 1;
 
-  const [{ rows, total, sumAmount, pageSize }, companies] = await Promise.all([
-    getReceipts({
-      q,
-      companyId,
-      status,
-      month: monthStr ? Number(monthStr) : undefined,
-      year: monthStr ? filterYear : undefined,
-      page,
-      pageSize: 10,
-    }),
-    getCompanies(),
-  ]);
+  const [{ rows, total, sumAmount, pageSize }, companies, settings] =
+    await Promise.all([
+      getReceipts({
+        q,
+        companyId,
+        status,
+        month: monthStr ? Number(monthStr) : undefined,
+        year: monthStr ? filterYear : undefined,
+        page,
+        pageSize: 10,
+      }),
+      getCompanies(),
+      getSettings(),
+    ]);
 
   const params: Record<string, string> = {};
   if (q) params.q = q;
@@ -120,7 +123,7 @@ export default async function KwitansiPage({
                   <div>
                     <StatusBadge status={r.status} />
                   </div>
-                  <RowActions receipt={r} />
+                  <RowActions receipt={r} settings={settings} />
                 </div>
               ))}
             </div>
@@ -150,7 +153,7 @@ export default async function KwitansiPage({
                         {formatDateShort(r.payment_date)}
                       </div>
                     </div>
-                    <RowActions receipt={r} />
+                    <RowActions receipt={r} settings={settings} />
                   </div>
                 </div>
               ))}

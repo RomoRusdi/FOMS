@@ -150,9 +150,9 @@ export async function getReceipts(
 /** Auto-generate the next receipt number for the given date's year. */
 export async function getNextReceiptNumber(
   date: string | Date = new Date(),
+  pattern: string = DEFAULT_SETTINGS.receiptPattern,
 ): Promise<string> {
   const year = new Date(date).getFullYear();
-  const pattern = DEFAULT_SETTINGS.receiptPattern;
 
   if (!isSupabaseConfigured) {
     const maxSeq = MOCK_RECEIPTS.reduce((max, r) => {
