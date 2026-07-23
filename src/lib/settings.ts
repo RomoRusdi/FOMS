@@ -20,9 +20,9 @@ export interface Settings {
 export const DEFAULT_SETTINGS: Settings = {
   city: "Jakarta",
   bankName: "Bank Central Asia (BCA)",
-  bankAccountName: "Taufic Yuniyanto",
-  bankAccountNumber: "0073303661",
-  signerName: "Taufic Yuniyanto",
+  bankAccountName: "Rusdi Junior",
+  bankAccountNumber: "0213102100",
+  signerName: "Rusdi Junior",
   receiptPattern:
     process.env.NEXT_PUBLIC_RECEIPT_PATTERN || DEFAULT_RECEIPT_PATTERN,
 };
