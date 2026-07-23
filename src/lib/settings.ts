@@ -1,32 +1,28 @@
 import { DEFAULT_RECEIPT_PATTERN } from "./receipt-number";
 
 export interface Settings {
-  companyName: string;
-  companyAddress: string;
+  /** City shown next to the date, e.g. "JAKARTA, 19 Juli 2026". */
   city: string;
-  bankLine: string;
-  footerNote: string;
+  /** Payment instructions (footer block). */
+  bankName: string;
+  bankAccountName: string; // "Atas Nama"
+  bankAccountNumber: string; // "No. Rekening"
+  /** Name printed at the signature (bottom right). */
   signerName: string;
-  signerRole: string;
   receiptPattern: string;
 }
 
 /**
- * Kwitansi header/footer defaults (PRD Module 10 — Settings). Values mirror the
- * hi-fi mock; wire to a `settings` table + logo upload later.
+ * Kwitansi identity defaults (PRD Module 10 — Settings). The client-safe
+ * baseline; empty DB fields fall back to these. Edit live on /pengaturan.
+ * The async, DB-backed getSettings() lives in "@/lib/data/settings" (server).
  */
 export const DEFAULT_SETTINGS: Settings = {
-  companyName: "PT KECAP NUSANTARA",
-  companyAddress: "",
   city: "Jakarta",
-  bankLine: "",
-  footerNote: "",
-  signerName: "",
-  signerRole: "",
+  bankName: "Bank Central Asia (BCA)",
+  bankAccountName: "Taufic Yuniyanto",
+  bankAccountNumber: "0073303661",
+  signerName: "Taufic Yuniyanto",
   receiptPattern:
     process.env.NEXT_PUBLIC_RECEIPT_PATTERN || DEFAULT_RECEIPT_PATTERN,
 };
-
-// NOTE: the async, DB-backed getSettings() lives in "@/lib/data/settings"
-// (server-only). DEFAULT_SETTINGS here is the client-safe fallback/baseline —
-// empty DB fields fall back to these values.

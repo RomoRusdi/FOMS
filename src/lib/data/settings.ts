@@ -25,13 +25,14 @@ export async function getSettings(): Promise<Settings> {
   if (!data) return DEFAULT_SETTINGS;
 
   return {
-    companyName: pick(data.company_name, DEFAULT_SETTINGS.companyName),
-    companyAddress: pick(data.company_address, DEFAULT_SETTINGS.companyAddress),
     city: pick(data.city, DEFAULT_SETTINGS.city),
-    bankLine: pick(data.bank_line, DEFAULT_SETTINGS.bankLine),
-    footerNote: pick(data.footer_note, DEFAULT_SETTINGS.footerNote),
+    bankName: pick(data.bank_name, DEFAULT_SETTINGS.bankName),
+    bankAccountName: pick(data.bank_account_name, DEFAULT_SETTINGS.bankAccountName),
+    bankAccountNumber: pick(
+      data.bank_account_number,
+      DEFAULT_SETTINGS.bankAccountNumber,
+    ),
     signerName: pick(data.signer_name, DEFAULT_SETTINGS.signerName),
-    signerRole: pick(data.signer_role, DEFAULT_SETTINGS.signerRole),
     receiptPattern: pick(data.receipt_pattern, DEFAULT_SETTINGS.receiptPattern),
   };
 }

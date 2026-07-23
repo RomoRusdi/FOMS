@@ -15,13 +15,11 @@ export const receiptSchema = z.object({
 export type ReceiptInput = z.infer<typeof receiptSchema>;
 
 export const settingsSchema = z.object({
-  companyName: z.string().trim().min(1, "Nama perusahaan wajib diisi"),
-  companyAddress: z.string().trim().default(""),
   city: z.string().trim().default(""),
-  bankLine: z.string().trim().default(""),
-  footerNote: z.string().trim().default(""),
+  bankName: z.string().trim().default(""),
+  bankAccountName: z.string().trim().default(""),
+  bankAccountNumber: z.string().trim().default(""),
   signerName: z.string().trim().default(""),
-  signerRole: z.string().trim().default(""),
   receiptPattern: z.string().trim().min(1, "Pola nomor wajib diisi"),
 });
 

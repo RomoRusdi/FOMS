@@ -29,13 +29,11 @@ export async function updateSettings(
   const supabase = await createClient();
   const { error } = await supabase.from("app_settings").upsert({
     id: 1,
-    company_name: d.companyName,
-    company_address: d.companyAddress,
     city: d.city,
-    bank_line: d.bankLine,
-    footer_note: d.footerNote,
+    bank_name: d.bankName,
+    bank_account_name: d.bankAccountName,
+    bank_account_number: d.bankAccountNumber,
     signer_name: d.signerName,
-    signer_role: d.signerRole,
     receipt_pattern: d.receiptPattern,
   });
 

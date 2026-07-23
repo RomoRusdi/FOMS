@@ -13,6 +13,11 @@ export function formatNumber(amount: number): string {
   return new Intl.NumberFormat("id-ID").format(Math.round(amount || 0));
 }
 
+/** Kwitansi amount box format: "2,500,000,-" (comma groups + trailing ,-). */
+export function formatKwitansiAmount(amount: number): string {
+  return new Intl.NumberFormat("en-US").format(Math.round(amount || 0)) + ",-";
+}
+
 /**
  * Compact rupiah for stat tiles: Rp 550jt, Rp 1,2m, Rp 80jt.
  * jt = juta (1e6), m = miliar (1e9), rb = ribu (1e3).

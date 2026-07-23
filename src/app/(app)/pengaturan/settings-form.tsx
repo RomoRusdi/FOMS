@@ -117,40 +117,34 @@ export function SettingsForm({ initial }: { initial: Settings }) {
       <div className="flex flex-1 flex-col gap-[18px] p-4 lg:flex-row lg:p-[18px]">
         {/* Form */}
         <div className="flex min-w-0 flex-1 flex-col gap-[18px]">
-          <Section title="Perusahaan">
+          <Section title="Umum">
             <Field
-              label="Nama Perusahaan"
-              value={s.companyName}
-              onChange={(v) => set({ companyName: v })}
-              placeholder="PT KECAP NUSANTARA"
-            />
-            <Field
-              label="Alamat & Telp"
-              value={s.companyAddress}
-              onChange={(v) => set({ companyAddress: v })}
-              placeholder="Jl. Pelabuhan Raya No. 88, Surabaya · Telp (031) 555-0188"
-              textarea
-            />
-            <Field
-              label="Kota (tempat tanda tangan)"
+              label="Kota (tempat & tanggal)"
               value={s.city}
               onChange={(v) => set({ city: v })}
-              placeholder="Surabaya"
+              placeholder="Jakarta"
+              hint="Tampil sebagai: JAKARTA, 19 Juli 2026"
             />
           </Section>
 
-          <Section title="Footer Kwitansi">
+          <Section title="Rekening Pembayaran">
             <Field
-              label="Baris Rekening"
-              value={s.bankLine}
-              onChange={(v) => set({ bankLine: v })}
-              placeholder="Bank Mandiri · 142-00-1234567-8 · a.n PT Kecap Nusantara"
+              label="Bank"
+              value={s.bankName}
+              onChange={(v) => set({ bankName: v })}
+              placeholder="Bank Central Asia (BCA)"
             />
             <Field
-              label="Catatan Footer"
-              value={s.footerNote}
-              onChange={(v) => set({ footerNote: v })}
-              placeholder="Dokumen sah tanpa tanda tangan basah"
+              label="Atas Nama"
+              value={s.bankAccountName}
+              onChange={(v) => set({ bankAccountName: v })}
+              placeholder="Taufic Yuniyanto"
+            />
+            <Field
+              label="No. Rekening"
+              value={s.bankAccountNumber}
+              onChange={(v) => set({ bankAccountNumber: v })}
+              placeholder="0073303661"
             />
           </Section>
 
@@ -159,13 +153,7 @@ export function SettingsForm({ initial }: { initial: Settings }) {
               label="Nama Penandatangan"
               value={s.signerName}
               onChange={(v) => set({ signerName: v })}
-              placeholder="Andi Darma"
-            />
-            <Field
-              label="Jabatan"
-              value={s.signerRole}
-              onChange={(v) => set({ signerRole: v })}
-              placeholder="Admin Finance"
+              placeholder="Taufic Yuniyanto"
             />
           </Section>
 
@@ -195,11 +183,11 @@ export function SettingsForm({ initial }: { initial: Settings }) {
               data={{
                 number: numberExample,
                 date: new Date().toISOString(),
-                companyName: "PT Samudra Biru",
+                companyName: "PT. PBM",
                 amount: 2_500_000,
                 amountWords: terbilang(2_500_000),
-                description: "Jasa bongkar muat kargo — contoh keperluan.",
-                vesselName: "MV Sinar Jaya",
+                description: "Pemakaian 1 Shift Forklift 15 ton",
+                vesselName: null,
               }}
             />
           </div>
