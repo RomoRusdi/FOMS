@@ -34,6 +34,10 @@ export interface Receipt {
   payment_amount_words: string;
   payment_date: string; // ISO date
   status: ReceiptStatus;
+  // Per-receipt payment account snapshot (empty = fall back to Settings default).
+  bank_name: string;
+  bank_account_name: string;
+  bank_account_number: string;
   pdf_url: string | null;
   created_at: string;
 }

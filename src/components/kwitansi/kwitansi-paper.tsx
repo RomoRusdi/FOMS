@@ -10,6 +10,10 @@ export interface KwitansiPaperData {
   amountWords: string;
   description: string;
   vesselName?: string | null;
+  // Per-kwitansi payment account (empty → falls back to Settings default).
+  bankName?: string;
+  bankAccountName?: string;
+  bankAccountNumber?: string;
 }
 
 const EMPTY = "—";
@@ -51,6 +55,9 @@ export function KwitansiPaper({
   settings: Settings;
 }) {
   const words = (data.amountWords || "").toUpperCase();
+  const bankName = data.bankName || settings.bankName;
+  const bankAccountName = data.bankAccountName || settings.bankAccountName;
+  const bankAccountNumber = data.bankAccountNumber || settings.bankAccountNumber;
 
   return (
     <div
@@ -104,9 +111,9 @@ export function KwitansiPaper({
       <div className="mt-6 flex items-start justify-between gap-6">
         <div className="min-w-0 space-y-1 leading-relaxed">
           <div>Untuk Pembayaran Mohon ditujukan ke :</div>
-          <InfoRow label="Bank" value={settings.bankName} />
-          <InfoRow label="Atas Nama" value={settings.bankAccountName} />
-          <InfoRow label="No. Rekening" value={settings.bankAccountNumber} />
+          <InfoRow label="Bank" value={bankName} />
+          <InfoRow label="Atas Nama" value={bankAccountName} />
+          <InfoRow label="No. Rekening" value={bankAccountNumber} />
         </div>
         <div className="flex-none pt-8 text-center">
           <div className="text-[14px] font-bold">

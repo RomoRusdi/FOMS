@@ -91,6 +91,9 @@ function KwitansiDocument({
   settings: Settings;
 }) {
   const words = (data.amountWords || "").toUpperCase();
+  const bankName = data.bankName || settings.bankName;
+  const bankAccountName = data.bankAccountName || settings.bankAccountName;
+  const bankAccountNumber = data.bankAccountNumber || settings.bankAccountNumber;
 
   return (
     <Document title={`Kwitansi ${data.number}`} creator="FOMS">
@@ -134,9 +137,9 @@ function KwitansiDocument({
         <View style={styles.payRow}>
           <View style={styles.payBlock}>
             <Text>Untuk Pembayaran Mohon ditujukan ke :</Text>
-            <InfoLine label="Bank" value={settings.bankName} />
-            <InfoLine label="Atas Nama" value={settings.bankAccountName} />
-            <InfoLine label="No. Rekening" value={settings.bankAccountNumber} />
+            <InfoLine label="Bank" value={bankName} />
+            <InfoLine label="Atas Nama" value={bankAccountName} />
+            <InfoLine label="No. Rekening" value={bankAccountNumber} />
           </View>
           <Text style={styles.signer}>{settings.signerName || "—"}</Text>
         </View>

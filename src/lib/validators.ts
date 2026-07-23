@@ -10,6 +10,10 @@ export const receiptSchema = z.object({
   description: z.string().trim().min(1, "Keperluan wajib diisi"),
   vesselId: z.string().nullish(),
   status: z.enum(["Lunas", "Pending", "Draft"]).default("Lunas"),
+  // Payment account shown on this kwitansi.
+  bankName: z.string().trim().default(""),
+  bankAccountName: z.string().trim().default(""),
+  bankAccountNumber: z.string().trim().default(""),
 });
 
 export type ReceiptInput = z.infer<typeof receiptSchema>;

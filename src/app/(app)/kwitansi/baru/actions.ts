@@ -43,6 +43,9 @@ export async function createReceipt(input: ReceiptInput): Promise<CreateResult> 
     payment_amount_words: words,
     payment_date: data.date,
     status: data.status,
+    bank_name: data.bankName,
+    bank_account_name: data.bankAccountName,
+    bank_account_number: data.bankAccountNumber,
   });
 
   if (error) return { ok: false, error: error.message };

@@ -41,6 +41,9 @@ function mapRow(row: any): Receipt {
     payment_amount_words: row.payment_amount_words ?? terbilang(amount),
     payment_date: row.payment_date,
     status: (row.status as ReceiptStatus) ?? "Draft",
+    bank_name: row.bank_name ?? "",
+    bank_account_name: row.bank_account_name ?? "",
+    bank_account_number: row.bank_account_number ?? "",
     pdf_url: row.pdf_url ?? null,
     created_at: row.created_at ?? row.payment_date,
   };

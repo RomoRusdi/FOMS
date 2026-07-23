@@ -30,6 +30,9 @@ function toPaperData(r: Receipt): KwitansiPaperData {
     amountWords: r.payment_amount_words,
     description: r.payment_description,
     vesselName: r.vessel_name,
+    bankName: r.bank_name,
+    bankAccountName: r.bank_account_name,
+    bankAccountNumber: r.bank_account_number,
   };
 }
 

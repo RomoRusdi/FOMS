@@ -17,12 +17,14 @@ export interface Settings {
  * baseline; empty DB fields fall back to these. Edit live on /pengaturan.
  * The async, DB-backed getSettings() lives in "@/lib/data/settings" (server).
  */
+// NOTE: keep this free of real/personal data — it is committed to git.
+// Real values live in the DB (Pengaturan page) and per-kwitansi.
 export const DEFAULT_SETTINGS: Settings = {
   city: "Jakarta",
-  bankName: "Bank Central Asia (BCA)",
-  bankAccountName: "Rusdi Junior",
-  bankAccountNumber: "0213102100",
-  signerName: "Rusdi Junior",
+  bankName: "",
+  bankAccountName: "",
+  bankAccountNumber: "",
+  signerName: "",
   receiptPattern:
     process.env.NEXT_PUBLIC_RECEIPT_PATTERN || DEFAULT_RECEIPT_PATTERN,
 };

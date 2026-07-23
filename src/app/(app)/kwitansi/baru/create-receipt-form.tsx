@@ -47,6 +47,9 @@ function Field({
 const fieldSelect =
   "flex h-[42px] w-full items-center justify-between rounded-[10px] border border-line bg-surface px-[13px] text-[13px] outline-none data-[popup-open]:border-brand data-[popup-open]:ring-[3px] data-[popup-open]:ring-brand-soft";
 
+const inputCls =
+  "h-[42px] w-full rounded-[10px] border border-line bg-surface px-[13px] text-[13.5px] text-ink outline-none focus:border-brand focus:ring-[3px] focus:ring-brand-soft placeholder:text-meta";
+
 export function CreateReceiptForm({
   companies,
   vessels,
@@ -71,6 +74,13 @@ export function CreateReceiptForm({
   const [date, setDate] = useState(initialDate);
   const [amount, setAmount] = useState(initial.amount);
   const [description, setDescription] = useState(initial.description);
+  const [bankName, setBankName] = useState(settings.bankName);
+  const [bankAccountName, setBankAccountName] = useState(
+    settings.bankAccountName,
+  );
+  const [bankAccountNumber, setBankAccountNumber] = useState(
+    settings.bankAccountNumber,
+  );
 
   useEffect(() => {
     preloadPdf();
@@ -89,6 +99,9 @@ export function CreateReceiptForm({
       description,
       vesselId: vesselId || null,
       status,
+      bankName,
+      bankAccountName,
+      bankAccountNumber,
     };
     const parsed = receiptSchema.safeParse(input);
     if (!parsed.success) {
@@ -132,6 +145,9 @@ export function CreateReceiptForm({
           amountWords,
           description,
           vesselName,
+          bankName,
+          bankAccountName,
+          bankAccountNumber,
         },
         settings,
       );
@@ -297,6 +313,44 @@ export function CreateReceiptForm({
               </div>
             </div>
           </div>
+
+          <div className="flex flex-col gap-4 rounded-[14px] border border-line bg-surface px-[22px] py-5">
+            <div>
+              <div className="text-[15px] font-bold text-ink">
+                Rekening Pembayaran
+              </div>
+              <div className="text-[12px] text-meta">
+                Tampil di footer kwitansi. Prefill dari Pengaturan — bisa diubah
+                khusus kwitansi ini.
+              </div>
+            </div>
+            <Field label="Bank">
+              <input
+                value={bankName}
+                onChange={(e) => setBankName(e.target.value)}
+                placeholder="Bank Central Asia (BCA)"
+                className={inputCls}
+              />
+            </Field>
+            <div className="flex flex-col gap-3.5 sm:flex-row">
+              <Field label="Atas Nama">
+                <input
+                  value={bankAccountName}
+                  onChange={(e) => setBankAccountName(e.target.value)}
+                  placeholder="Nama pemilik rekening"
+                  className={inputCls}
+                />
+              </Field>
+              <Field label="No. Rekening">
+                <input
+                  value={bankAccountNumber}
+                  onChange={(e) => setBankAccountNumber(e.target.value)}
+                  placeholder="0000000000"
+                  className={inputCls}
+                />
+              </Field>
+            </div>
+          </div>
         </div>
 
         {/* Preview */}
@@ -332,6 +386,9 @@ export function CreateReceiptForm({
               amountWords,
               description,
               vesselName,
+              bankName,
+              bankAccountName,
+              bankAccountNumber,
             }}
           />
         </div>
