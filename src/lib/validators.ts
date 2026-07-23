@@ -24,3 +24,16 @@ export const settingsSchema = z.object({
 });
 
 export type SettingsInput = z.infer<typeof settingsSchema>;
+
+export const companySchema = z.object({
+  company_name: z.string().trim().min(1, "Nama PT wajib diisi"),
+  address: z.string().trim().default(""),
+  pic: z.string().trim().default(""),
+  phone: z.string().trim().default(""),
+});
+
+export const vesselSchema = z.object({
+  vessel_name: z.string().trim().min(1, "Nama kapal wajib diisi"),
+  code: z.string().trim().default(""),
+  owner: z.string().trim().default(""),
+});
