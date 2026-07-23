@@ -53,7 +53,10 @@ export function KwitansiPaper({
   const words = (data.amountWords || "").toUpperCase();
 
   return (
-    <div className="rounded-lg border border-line bg-white p-5 text-[13px] text-[#111827] shadow-[0_14px_40px_-16px_rgba(16,31,54,.35)] sm:p-8">
+    <div
+      style={{ fontFamily: "var(--font-kwitansi), Arial, sans-serif" }}
+      className="rounded-lg border border-line bg-white p-5 text-[13px] text-[#111827] shadow-[0_14px_40px_-16px_rgba(16,31,54,.35)] sm:p-8"
+    >
       {/* Title */}
       <div className="flex items-start justify-between">
         <div className="text-[32px] font-extrabold leading-none tracking-tight sm:text-[40px]">

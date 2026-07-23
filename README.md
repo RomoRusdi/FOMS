@@ -68,7 +68,7 @@ supabase/
 
 ## Design tokens
 
-Warna dan radius dari handoff dipetakan di [src/app/globals.css](src/app/globals.css). Font memakai **Inter** (via `next/font`, `--font-sans-family`; handoff aslinya Plus Jakarta Sans):
+Warna dan radius dari handoff dipetakan di [src/app/globals.css](src/app/globals.css). Font aplikasi memakai **Manrope** (`--font-sans-family`); kwitansi (preview) dikunci ke **Inter** (`--font-kwitansi`) dan PDF-nya Helvetica — lihat [layout.tsx](src/app/layout.tsx):
 token semantik shadcn (`--primary` = navy `#14294a`, `--border` = `#e5e9f0`, dst.) **plus** utilitas kustom `bg-navy`, `text-brand`, `bg-page`, `text-meta`, `bg-success-soft`, dll. Semua angka memakai `tabnum` (tabular-nums).
 
 ## Logika kunci
