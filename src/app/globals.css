@@ -29,7 +29,8 @@
   --color-danger: #d1495b;
   --color-danger-soft: #fbe9ec;
 
-  --font-sans: var(--font-sans-family), system-ui, sans-serif;
+  --font-sans: var(--font-sans-family, ui-sans-serif), system-ui, "Segoe UI",
+    Roboto, Arial, sans-serif;
 }
 
 @theme inline {
@@ -137,13 +138,16 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html,
+  body {
+    /* Reference the next/font variable directly with an inline sans fallback so
+       an undefined var can never make font-family invalid (which falls to serif). */
+    font-family: var(--font-sans-family, ui-sans-serif), system-ui, "Segoe UI",
+      Roboto, Arial, sans-serif;
+  }
   body {
     @apply bg-page text-ink;
-    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-  }
-  html {
-    @apply font-sans;
   }
   /* Currency / numbers always tabular per design tokens */
   .tabnum {
